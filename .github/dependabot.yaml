@@ -1,0 +1,18 @@
+version: 2
+registries:
+  maven-github:
+    type: "maven-repository"
+    url: "https://maven.pkg.github.com/sheikhimtiaz-wind"
+    username: "sheikhimtiaz-wind"
+    password: ${{ secrets.GH_PACKAGE_TOKEN }} # Globally available 
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    registries:
+      - "maven-github"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "fix"
+      prefix-development: "chore"
+      include: "scope"  
