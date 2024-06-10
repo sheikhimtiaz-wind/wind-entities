@@ -32,14 +32,6 @@
 		</repository>
 	</repositories>
 
-	<servers>
-		<server>
-			<id>github</id>
-			<username>sheikhimtiaz-wind</username>
-			<password>${env.GITHUB_TOKEN}</password>
-		</server>
-	</servers>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
