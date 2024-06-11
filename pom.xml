@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sheikhimtiaz</groupId>
-	<artifactId>commonlibs</artifactId>
+	<artifactId>wind-entities</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>commonlibs</name>
-	<description>Common libraries for spring boot projects</description>
+	<name>wind-entities</name>
+	<description>wind-entities for spring boot projects</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

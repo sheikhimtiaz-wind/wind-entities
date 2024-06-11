@@ -35,33 +35,33 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Increment version and tag
-        id: tag_version
-        run: |
-          echo "Current version:"
-          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
-          version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "Version: $version"
-
-          # Increment patch version number
-          IFS='.' read -r -a version_parts <<< "$version"
-          major="${version_parts[0]}"
-          minor="${version_parts[1]}"
-          patch="${version_parts[2]}"
-          new_patch=$((patch + 1))
-          new_version="$major.$minor.$new_patch"
-          echo "New version: $new_version"
-
-          # Update pom.xml with new version
-          mvn versions:set -DnewVersion=$new_version
-          mvn versions:commit
-
-          # Commit and tag the new version
-          git add pom.xml
-          git commit -m "Release version $new_version"
-          git tag -a "v$new_version" -m "Release version $new_version"
-          git push origin --tags
-          git push origin HEAD:main
+#      - name: Increment version and tag
+#        id: tag_version
+#        run: |
+#          echo "Current version:"
+#          mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+#          version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+#          echo "Version: $version"
+#
+#          # Increment patch version number
+#          IFS='.' read -r -a version_parts <<< "$version"
+#          major="${version_parts[0]}"
+#          minor="${version_parts[1]}"
+#          patch="${version_parts[2]}"
+#          new_patch=$((patch + 1))
+#          new_version="$major.$minor.$new_patch"
+#          echo "New version: $new_version"
+#
+#          # Update pom.xml with new version
+#          mvn versions:set -DnewVersion=$new_version
+#          mvn versions:commit
+#
+#          # Commit and tag the new version
+#          git add pom.xml
+#          git commit -m "Release version $new_version"
+#          git tag -a "v$new_version" -m "Release version $new_version"
+#          git push origin --tags
+#          git push origin HEAD:main
 
       - name: Publish to GitHub Packages
         run: mvn deploy
