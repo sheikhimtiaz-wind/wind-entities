@@ -1,51 +1,36 @@
-name: Release
+name: Maven Package
 
 on:
   push:
     branches:
-      - main  # Change this to your branch name
+      - main
+  release:
+    types: [created]
 
 jobs:
-  release:
+  build:
+
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Java
+      - uses: actions/checkout@v4
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2-
+          distribution: 'temurin'
+          server-id: github
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn -B package --file pom.xml
 
-      - name: Set up Git for tagging
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Publish to GitHub Packages
-        run: mvn deploy
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
+#          GITHUB_TOKEN: ${{ github.token }}
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
 
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        with:
-          tag_name: "v1.0.0"
-          release_name: "Release 1.0.0"
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
