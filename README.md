@@ -1,3 +1,5 @@
+# Wind Entities
+
 == Installation
 
 To use WindEntities in your project, you can add it as a Maven dependency.
