@@ -7,7 +7,7 @@ To use WindEntities in your project, you can add it as a Maven dependency.
 <dependency>
   <groupId>com.sheikhimtiaz</groupId>
   <artifactId>wind-entities</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ----
 
