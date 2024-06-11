@@ -1,4 +1,4 @@
-package com.sheikhimtiaz.commonlibs;
+package com.sheikhimtiaz.windentities;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

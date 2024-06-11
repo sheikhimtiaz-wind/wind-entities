@@ -1,4 +1,4 @@
-package com.sheikhimtiaz.commonlibs.utils;
+package com.sheikhimtiaz.windentities.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +18,12 @@ public class CryptoUtils {
     private static final Logger logger = LoggerFactory.getLogger(CryptoUtils.class);
 
     @Value("${backup.share.enc.key}")
-    private String backupShareEncKey;
+    private static String backupShareEncKey;
 
     @Value("${backup.share.enc.salt}")
-    private String backupShareEncSalt;
+    private static String backupShareEncSalt;
 
-    public String encrypt(String strToEncrypt) {
+    public static String encrypt(String strToEncrypt) {
         if(strToEncrypt == null || strToEncrypt.isEmpty()) return null;
         try {
             byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -46,7 +46,7 @@ public class CryptoUtils {
         return null;
     }
 
-    public String decrypt(String strToDecrypt) {
+    public static String decrypt(String strToDecrypt) {
         try {
             byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             IvParameterSpec ivspec = new IvParameterSpec(iv);
